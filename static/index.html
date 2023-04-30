@@ -1,0 +1,48 @@
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <script type="module" src="canvas.js"></script>
+    <script src="wasm_exec.js"></script>
+    <script type="module">
+        import { graph } from "./canvas.js";
+        const g = graph(document.body.offsetWidth, document.body.offsetHeight)
+        document.body.appendChild(g)
+
+        document.k8sEvent = (evt) => {
+            setTimeout(() => {
+                const { id, type, edges, content } = evt
+                // console.log(type, id)
+                switch (type) {
+                    case "created":
+                    case "updated":
+                        g.spawn({
+                            id, edges, content
+                        })
+                        break
+                    case "deleted":
+                        g.remove(id)
+                        break
+                }
+            }, 0);
+        }
+
+
+        const go = new Go();
+        go.env = {
+            HOST: `${location.protocol}//${location.host}`
+        }
+        WebAssembly.instantiateStreaming(fetch("main.wasm"), go.importObject).then((result) => {
+            go.run(result.instance);
+        });
+    </script>
+</head>
+
+<body>
+    <div style="position: fixed;">
+        <h1 id="info">Hello World</h1>
+        <h3 id="live">Hello World</h3>
+    </div>
+</body>
+
+</html>
