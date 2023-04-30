@@ -101,7 +101,7 @@ export function graph(width = 600, height = 600) {
         const [x, y] = d3.pointer(event);
         mouse = { x, y };
         document.getElementById("live").innerText = simulation.find(mouse.x, mouse.y).id
-        simulation.alpha(0.001).restart();
+        simulation.alpha(0.1).restart();
     }
 
     function clicked(event) {
@@ -110,7 +110,6 @@ export function graph(width = 600, height = 600) {
         const tgt = simulation.find(mouse.x, mouse.y)
         console.log(tgt)
         document.getElementById("info").innerText = tgt.id
-        // remove(tgt.id)
     }
 
     function remove(id) {

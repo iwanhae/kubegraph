@@ -12,7 +12,7 @@
         document.k8sEvent = (evt) => {
             setTimeout(() => {
                 const { id, type, edges, content } = evt
-                // console.log(type, id)
+                console.log(type, id)
                 switch (type) {
                     case "created":
                     case "updated":
@@ -40,8 +40,8 @@
 
 <body>
     <div style="position: fixed;">
-        <h1 id="info">Hello World</h1>
-        <h3 id="live">Hello World</h3>
+        <h1 id="info"></h1>
+        <h3 id="live"></h3>
     </div>
 </body>
 
