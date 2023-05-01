@@ -128,6 +128,8 @@ export function graph(width = 600, height = 600) {
     }
 
     function spawn(source) {
+        source.x = 0;
+        source.y = height / 2;
         const oldIdx = nodes.findIndex(v => v.id === source.id)
         if (0 <= oldIdx) {
             const old = nodes[oldIdx]
@@ -162,7 +164,7 @@ export function graph(width = 600, height = 600) {
 
         simulation.nodes(nodes);
         simulation.force("link").links(links);
-        simulation.alpha(0.25).restart();
+        simulation.alpha(0.2).restart();
     }
 
     return Object.assign(svg.node(),
